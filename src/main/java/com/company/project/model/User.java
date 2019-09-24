@@ -1,22 +1,20 @@
 package com.company.project.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
-import javax.persistence.*;
 
 @Data
-@Table(name = "tbl_user")
+@TableName("tbl_user")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
 
     private String username;
 
     private String password;
 
-    @Column(name = "nick_name")
     private String nickName;
 
     private String phone;
@@ -27,7 +25,6 @@ public class User {
 
     private Integer sex;
 
-    @Column(name = "register_date")
     private Date registerDate;
 
 }

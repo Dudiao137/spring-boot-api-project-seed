@@ -1,7 +1,8 @@
 package com.company.project.dao;
 
-import com.company.project.core.Mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.company.project.model.User;
 
-public interface UserMapper extends Mapper<User> {
+public interface UserMapper extends BaseMapper<User> {
+
 }
