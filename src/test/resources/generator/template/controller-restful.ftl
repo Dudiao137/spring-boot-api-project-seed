@@ -1,4 +1,4 @@
-package ${basePackage}.web;
+package ${basePackage}.web.controller;
 
 import ${basePackage}.core.Result;
 import ${basePackage}.core.ResultGenerator;
@@ -12,7 +12,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by ${author} on ${date}.
+* @author : ${author}
+* @date : ${date}
 */
 @RestController
 @RequestMapping("${baseRequestMapping}")

@@ -163,8 +163,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         String linkString = sb.toString();
         linkString = StringUtils.substring(linkString, 0, linkString.length() - 1);//去除最后一个'&'
 
-        String secret = "Potato";//密钥，自己修改
-        String sign = DigestUtils.md5Hex(linkString + secret);//混合密钥md5
+        String secretKey = "Potato";//密钥，自己修改
+        String sign = DigestUtils.md5Hex(linkString + secretKey);//混合密钥md5
 
         return StringUtils.equals(sign, requestSign);//比较
     }

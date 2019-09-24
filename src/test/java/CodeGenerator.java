@@ -18,27 +18,27 @@ import static com.company.project.core.ProjectConstant.*;
  */
 public class CodeGenerator {
     //JDBC配置，请修改为你项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/test";
-    private static final String JDBC_USERNAME = "root";
-    private static final String JDBC_PASSWORD = "123456";
+    private static final String JDBC_URL = "jdbc:mysql://manjaro:3306/test";
+    private static final String JDBC_USERNAME = "test";
+    private static final String JDBC_PASSWORD = "test123456";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
-    private static final String PROJECT_PATH = System.getProperty("user.dir");//项目在硬盘上的基础路径
-    private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/generator/template";//模板位置
+    private static final String PROJECT_PATH = System.getProperty("user.dir");          //项目在硬盘上的基础路径
+    private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/generator/template";   //模板位置
 
-    private static final String JAVA_PATH = "/src/main/java"; //java文件路径
-    private static final String RESOURCES_PATH = "/src/main/resources";//资源文件路径
+    private static final String JAVA_PATH = "/src/main/java";                           //java文件路径
+    private static final String RESOURCES_PATH = "/src/main/resources";                 //资源文件路径
 
-    private static final String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);//生成的Service存放路径
-    private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);//生成的Service实现存放路径
-    private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);//生成的Controller存放路径
+    private static final String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);             //生成的Service存放路径
+    private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);   //生成的Service实现存放路径
+    private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);       //生成的Controller存放路径
 
-    private static final String AUTHOR = "CodeGenerator";//@author
-    private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
+    private static final String AUTHOR = "sy.wang";                                                     //@author
+    private static final String DATE = new SimpleDateFormat("yyyyMMdd").format(new Date());     //@date
 
     public static void main(String[] args) {
-        genCode("输入表名");
-        //genCodeByCustomModelName("输入表名","输入自定义Model名称");
+//        genCode("tbl_user");
+        genCodeByCustomModelName("tbl_user","User");
     }
 
     /**
@@ -48,6 +48,12 @@ public class CodeGenerator {
      */
     public static void genCode(String... tableNames) {
         for (String tableName : tableNames) {
+//            if (tableName.startsWith("tbl_")) {
+//                tableName = tableName.replace("tbl_", "");
+//            }
+//            if (tableName.startsWith("t_")) {
+//                tableName = tableName.replace("t_", "");
+//            }
             genCodeByCustomModelName(tableName, null);
         }
     }
@@ -180,8 +186,8 @@ public class CodeGenerator {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
-            //cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
-            cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
+            cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
+//            cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
 
             System.out.println(modelNameUpperCamel + "Controller.java 生成成功");
         } catch (Exception e) {
