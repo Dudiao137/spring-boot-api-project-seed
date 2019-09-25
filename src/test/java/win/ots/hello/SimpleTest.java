@@ -1,12 +1,11 @@
-package com.conpany.project;
+package win.ots.hello;
 
-import com.company.project.Application;
-import com.company.project.dao.UserMapper;
-import com.company.project.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import win.ots.hello.dao.UserRepository;
+import win.ots.hello.entity.User;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,13 +14,17 @@ import java.util.List;
 @SpringBootTest(classes = Application.class)
 public class SimpleTest {
 
+
+
     @Resource
-    private UserMapper userMapper;
+    private UserRepository userRepository;
+
+
 
     @Test
-    public void testSelect() {
+    public void testGenerator() {
         System.out.println(("----- selectAll method test ------"));
-        List<User> userList = userMapper.selectList(null);
+        List<User> userList = userRepository.findAll();
         userList.forEach(System.out::println);
     }
 }
