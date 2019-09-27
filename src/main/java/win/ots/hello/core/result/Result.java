@@ -1,4 +1,4 @@
-package win.ots.hello.core;
+package win.ots.hello.core.result;
 
 import com.alibaba.fastjson.JSON;
 

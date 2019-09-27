@@ -1,4 +1,4 @@
-package win.ots.hello.core;
+package win.ots.hello.core.result;
 
 /**
  * 响应结果生成工具

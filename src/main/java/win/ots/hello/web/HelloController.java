@@ -2,8 +2,9 @@ package win.ots.hello.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import win.ots.hello.core.Result;
-import win.ots.hello.core.ResultGenerator;
+import win.ots.hello.core.result.Result;
+import win.ots.hello.core.result.ResultGenerator;
+
 
 /**
  * @author: sy.wang

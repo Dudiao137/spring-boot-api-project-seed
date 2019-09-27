@@ -12,7 +12,7 @@ public interface UserService {
 
     List<User> findAll();
 
-    User get(Long userId);
+    User findById(Long userId);
 
 
 }
