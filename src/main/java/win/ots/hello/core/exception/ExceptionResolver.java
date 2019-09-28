@@ -1,6 +1,7 @@
 package win.ots.hello.core.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -29,6 +30,8 @@ public class ExceptionResolver implements HandlerExceptionResolver {
         if (ex instanceof ServiceException) {                                       //业务失败的异常，如“账号或密码错误”
             result.setCode(ResultCode.FAIL).setMessage(ex.getMessage());
             log.info(ex.getMessage());
+        } else if (ex instanceof AuthenticationException) {                         // 登录出错
+            result.setCode(ResultCode.UNAUTHORIZED).setMessage(ex.getMessage());
         } else if (ex instanceof NoHandlerFoundException) {
             result.setCode(ResultCode.NOT_FOUND).setMessage("接口 [" + request.getRequestURI() + "] 不存在");
         } else if (ex instanceof ServletException) {

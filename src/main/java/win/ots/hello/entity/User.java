@@ -14,20 +14,26 @@ public class User implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	private String username;
+	@Column(name = "user_name")
+	private String userName;
 
+	@Column(name = "password")
 	private String password;
 
 	@Column(name = "nick_name")
 	private String nickName;
 
+	@Column(name = "phone")
 	private String phone;
 
+	@Column(name = "email")
 	private String email;
 
+	@Column(name = "avatar")
 	private String avatar;
 
-	private Long sex;
+	@Column(name = "sex")
+	private Integer sex;
 
 	@Column(name = "register_date")
 	private java.util.Date registerDate;

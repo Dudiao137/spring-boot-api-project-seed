@@ -3,6 +3,7 @@ package win.ots.hello.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import win.ots.hello.entity.Role;
 import win.ots.hello.entity.User;
 
 /**
@@ -10,9 +11,7 @@ import win.ots.hello.entity.User;
  * @date : 20190925
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    @Query
-    User getByUserName(String userName);
 
 }
