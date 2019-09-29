@@ -3,6 +3,7 @@ package win.ots.hello.configurer;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import win.ots.hello.core.shiro.OtsRealm;
@@ -45,5 +46,16 @@ public class ShiroConfig {
         return bean;
     }
 
+    @Bean
+    public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
+
+        /**
+         * 在引入spring apo 下，在controller中加入requiresRole会导致404的奇怪bug
+         */
+        creator.setUsePrefix(true);
+
+        return creator;
+    }
 
 }
