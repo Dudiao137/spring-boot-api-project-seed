@@ -43,7 +43,6 @@ public class OtsRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 
         authorizationInfo.setRoles(roles);
-        authorizationInfo.addStringPermission("view");
 
         return authorizationInfo;
     }

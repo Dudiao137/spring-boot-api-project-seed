@@ -1,9 +1,6 @@
 package win.ots.hello.web.controller;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import win.ots.hello.core.result.Result;
@@ -32,7 +29,7 @@ public class UserController {
         return ResultGenerator.genSuccessResult(user);
     }
 
-    @RequiresPermissions("admin:view")
+    @RequiresRoles("admin")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<User>> list(@RequestBody UserQuery query) {
         List<User> users = userService.findAll();

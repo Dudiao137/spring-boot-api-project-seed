@@ -20,6 +20,9 @@ public class User implements Serializable {
 	@Column(name = "password")
 	private String password;
 
+	@Column(name = "salt")
+	private String salt;
+
 	@Column(name = "nick_name")
 	private String nickName;
 

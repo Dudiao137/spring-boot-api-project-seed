@@ -1,19 +1,23 @@
 package win.ots.hello.service.impl;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import win.ots.hello.constant.ErrorCode;
+import win.ots.hello.constant.ShiroConstant;
+import win.ots.hello.core.exception.ServiceException;
 import win.ots.hello.dao.RoleRepository;
 import win.ots.hello.dao.UserRepository;
 import win.ots.hello.dao.UserRoleRelationRepository;
 import win.ots.hello.entity.User;
 import win.ots.hello.entity.UserRoleRelation;
 import win.ots.hello.service.UserService;
+import win.ots.hello.web.vo.UserCreateVo;
+import win.ots.hello.web.vo.UserInfoVo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author: sy.wang
@@ -58,5 +62,33 @@ public class UserServiceImpl implements UserService {
         }
 
         return roleNames;
+    }
+
+    @Override
+    public UserInfoVo createUser(UserCreateVo createVo) {
+        if (createVo == null) {
+            throw new ServiceException(ErrorCode.CREATE_WITH_NO_INFO);
+        }
+
+        User user = new User();
+        BeanUtils.copyProperties(createVo, user);
+        user.setRegisterDate(new Date());
+
+        String salt = UUID.randomUUID().toString().replaceAll("-", "");
+        String password = createVo.getPassword();
+        Object credentials = new SimpleHash(  ShiroConstant.HASH_ALGORITHM_NAME,
+                                    password,
+                                    salt,
+                                    ShiroConstant.HASH_ITERATIONS);
+        user.setSalt(salt);
+        user.setPassword(credentials.toString());
+
+
+        user = userRepository.save(user);
+
+        UserInfoVo userInfoVo = new UserInfoVo();
+        BeanUtils.copyProperties(user, userInfoVo);
+
+        return userInfoVo;
     }
 }

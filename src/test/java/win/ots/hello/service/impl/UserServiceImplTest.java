@@ -9,6 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import win.ots.hello.Application;
 import win.ots.hello.entity.User;
 import win.ots.hello.service.UserService;
+import win.ots.hello.web.vo.UserCreateVo;
+import win.ots.hello.web.vo.UserInfoVo;
 
 import java.util.List;
 import java.util.Set;
@@ -57,6 +59,23 @@ public class UserServiceImplTest {
         Set<String> roles = userService.getRoleByUserId(userId);
 
         log.info(roles.toString());
+
+    }
+
+    @Test
+    public void createUser() {
+
+        UserCreateVo userCreateVo = new UserCreateVo();
+        userCreateVo.setUserName("ots");
+        userCreateVo.setPassword("123456");
+        userCreateVo.setPhone("13288886666");
+        userCreateVo.setEmail("otswang@sina.com");
+        userCreateVo.setNickName("otswang");
+        userCreateVo.setAvatar("http://123.jpg");
+
+        UserInfoVo userInfoVo = userService.createUser(userCreateVo);
+
+        log.info(userInfoVo.toString());
 
     }
 }
