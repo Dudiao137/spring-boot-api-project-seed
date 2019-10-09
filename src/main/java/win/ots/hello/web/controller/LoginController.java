@@ -3,6 +3,7 @@ package win.ots.hello.web.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import win.ots.hello.core.result.Result;
@@ -39,7 +40,14 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result<UserInfoVo> doRegister(@RequestBody UserCreateVo createVo) {
-        UserInfoVo userInfoVo = userService.createUser(createVo);
+        User user = new User();
+        BeanUtils.copyProperties(createVo, user);
+
+        userService.insert(user);
+
+        UserInfoVo userInfoVo = new UserInfoVo();
+        BeanUtils.copyProperties(user, userInfoVo);
+
         return ResultGenerator.genSuccessResult(userInfoVo);
     }
 

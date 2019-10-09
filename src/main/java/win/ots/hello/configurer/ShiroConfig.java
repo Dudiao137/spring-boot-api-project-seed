@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import win.ots.hello.core.shiro.OtsRealm;
 
+import javax.annotation.Resource;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,15 +19,13 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    @Bean
-    OtsRealm otsRealm() {
-        return new OtsRealm();
-    }
+    @Resource
+    private OtsRealm otsRealm;
 
     @Bean
     DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(otsRealm());
+        manager.setRealm(otsRealm);
         return manager;
     }
 

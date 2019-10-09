@@ -11,23 +11,19 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
-import win.ots.hello.dao.UserRepository;
 import win.ots.hello.entity.User;
 import win.ots.hello.service.UserService;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Set;
 
 /**
  * @author : sy.wang
  * @date : 20190927
  */
-//@Component
+@Component
 public class OtsRealm extends AuthorizingRealm {
 
-    @Resource
-    private UserRepository userRepository;
     @Resource
     private UserService userService;
 
@@ -36,9 +32,9 @@ public class OtsRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         Subject subject = SecurityUtils.getSubject();
         String userName = (String) subject.getPrincipal();
-        User user = userRepository.getByUserName(userName);
+        User user = userService.getByUserName(userName);
 
-        Set<String> roles = userService.getRoleByUserId(user.getId());
+        Set<String> roles = userService.getRolesByUserId(user.getId());
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 
@@ -51,7 +47,7 @@ public class OtsRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
         String userName = (String) authenticationToken.getPrincipal();
-        User user = userRepository.getByUserName(userName);
+        User user = userService.getByUserName(userName);
 
         if (user == null) {
             throw new AuthenticationException("no user with userName :" + userName);

@@ -1,0 +1,13 @@
+db: # v1.1.0 新增
+  url: jdbc:mysql://manjaro:3306/test
+  username: test
+  password: test123456
+author: sy.wang
+packageName: win.ots.hello
+path:
+  controller:
+  service: service.impl
+  interf: service # v1.2.1 新增
+  dao: dao
+  entity: entity
+  mapper: mybatis

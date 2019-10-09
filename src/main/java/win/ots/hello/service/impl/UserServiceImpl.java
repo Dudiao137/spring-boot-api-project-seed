@@ -1,94 +1,89 @@
 package win.ots.hello.service.impl;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.shiro.crypto.hash.SimpleHash;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import win.ots.hello.constant.ErrorCode;
-import win.ots.hello.constant.ShiroConstant;
-import win.ots.hello.core.exception.ServiceException;
-import win.ots.hello.dao.RoleRepository;
-import win.ots.hello.dao.UserRepository;
-import win.ots.hello.dao.UserRoleRelationRepository;
+import win.ots.hello.dao.RoleDao;
+import win.ots.hello.dao.UserDao;
+import win.ots.hello.dao.UserRoleRelationDao;
+import win.ots.hello.entity.Role;
 import win.ots.hello.entity.User;
 import win.ots.hello.entity.UserRoleRelation;
 import win.ots.hello.service.UserService;
-import win.ots.hello.web.vo.UserCreateVo;
-import win.ots.hello.web.vo.UserInfoVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
- * @author: sy.wang
- * @date: 20190926
+ * Author: sy.wang
+ * Date: 20191009
  */
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserDao userDao;
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleDao roleDao;
     @Autowired
-    private UserRoleRelationRepository userRoleRelationRepository;
+    private UserRoleRelationDao userRoleRelationDao;
 
+    
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public User get(int id){
+        return userDao.get(id);
+    }
+    
+    @Override
+    public List<User> findList(User user) {
+        return userDao.findList(user);
+    }
+    
+    @Override
+    public List<User> findAllList() {
+        return userDao.findAllList();
+    }
+    
+    @Override
+    public int insert(User user) {
+        return userDao.insert(user);
+    }
+    
+    @Override
+    public int insertBatch(List<User> users){
+        return userDao.insertBatch(users);
+    }
+    
+    @Override
+    public int update(User user) {
+        return userDao.update(user);
+    }
+    
+    @Override
+    public int delete(User user) {
+        return userDao.delete(user);
     }
 
     @Override
-    public User findById(Long userId) {
-        return userRepository.findById(userId).orElse(null);
-    }
-
-    @Override
-    public User findByUserName(String userName) {
-        return userRepository.getByUserName(userName);
-    }
-
-
-    @Override
-    public Set<String> getRoleByUserId(Long userId) {
-        Set<String> roleNames = new HashSet<>();
-        List<UserRoleRelation> userRoleRelations = userRoleRelationRepository.getAllByUserId(userId);
+    public Set<String> getRolesByUserId(int userId) {
+        Set<String> roles = new HashSet<>();
+        UserRoleRelation userRoleRelation = new UserRoleRelation();
+        userRoleRelation.setUserId(userId);
+        List<UserRoleRelation> userRoleRelations = userRoleRelationDao.findList(userRoleRelation);
         if (CollectionUtils.isNotEmpty(userRoleRelations)) {
-            userRoleRelations.forEach(
-                    (relation) -> roleRepository.findById(relation.getRoleId()).ifPresent(
-                            (role -> roleNames.add(role.getRole()))
-                    )
-            );
+            userRoleRelations.forEach((item) -> {
+                Optional<Role> optionalRole = Optional.ofNullable(roleDao.get(item.getRoleId()));
+                optionalRole.ifPresent((role -> roles.add(role.getRole())));
+            });
         }
 
-        return roleNames;
+        return roles;
     }
 
     @Override
-    public UserInfoVo createUser(UserCreateVo createVo) {
-        if (createVo == null) {
-            throw new ServiceException(ErrorCode.CREATE_WITH_NO_INFO);
-        }
-
-        User user = new User();
-        BeanUtils.copyProperties(createVo, user);
-        user.setRegisterDate(new Date());
-
-        String salt = UUID.randomUUID().toString().replaceAll("-", "");
-        String password = createVo.getPassword();
-        Object credentials = new SimpleHash(  ShiroConstant.HASH_ALGORITHM_NAME,
-                                    password,
-                                    salt,
-                                    ShiroConstant.HASH_ITERATIONS);
-        user.setSalt(salt);
-        user.setPassword(credentials.toString());
-
-
-        user = userRepository.save(user);
-
-        UserInfoVo userInfoVo = new UserInfoVo();
-        BeanUtils.copyProperties(user, userInfoVo);
-
-        return userInfoVo;
+    public User getByUserName(String userName) {
+        return userDao.getByUserName(userName);
     }
 }

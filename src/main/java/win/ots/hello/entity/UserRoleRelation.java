@@ -1,25 +1,28 @@
 package win.ots.hello.entity;
 
-
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Date;
+import java.math.BigDecimal;
 
-
+/**
+ * Author: sy.wang
+ * Date: 20191009
+ */
 @Data
-@Entity
-@Table(name = "tbl_user_role_relation")
 public class UserRoleRelation implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    /* column = id */
+    private int id;
 
-    @Column(name = "user_id")
-    private long userId;
+    /* column = user_id */
+    private int userId;
 
-    @Column(name = "role_id")
-    private long roleId;
+    /* column = role_id */
+    private int roleId;
+
 
 }

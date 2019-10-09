@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="win.ots.hello.dao.UserRoleRelationDao">
+
+    <resultMap id="userRoleRelationResultMap" type="win.ots.hello.entity.UserRoleRelation">
+        <id column="id" property="id"/> 
+        <result column="userId" property="userId"/> 
+        <result column="roleId" property="roleId"/> 
+
+        
+        
+    </resultMap>
+
+    <sql id="userRoleRelationColumns">
+        tbl_user_role_relation.id AS "id",
+        tbl_user_role_relation.user_id AS "userId",
+        tbl_user_role_relation.role_id AS "roleId"
+    </sql>
+
+    <sql id="userRoleRelationJoins">
+        
+    </sql>
+
+    <select id="get" resultMap="userRoleRelationResultMap">
+        SELECT
+        <include refid="userRoleRelationColumns" />
+        FROM tbl_user_role_relation <include refid="userRoleRelationJoins" />
+        <where>
+        tbl_user_role_relation.id = #{id}
+        </where>
+    </select>
+
+    <select id="findList" resultMap="userRoleRelationResultMap">
+        SELECT
+        <include refid="userRoleRelationColumns" />
+        FROM tbl_user_role_relation <include refid="userRoleRelationJoins" />
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="userRoleRelationResultMap">
+        SELECT
+        <include refid="userRoleRelationColumns" />
+        FROM tbl_user_role_relation <include refid="userRoleRelationJoins" />
+        <where>
+        </where>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO tbl_user_role_relation(
+            id,
+            user_id,
+            role_id
+        )
+        VALUES (
+            #{id},
+            #{userId},
+            #{roleId}
+        )
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT INTO tbl_user_role_relation(
+            id,
+            user_id,
+            role_id
+        )
+        VALUES
+        <foreach collection ="list" item="userRoleRelation" separator =",">
+        (
+            #{userRoleRelation.id},
+            #{userRoleRelation.userId},
+            #{userRoleRelation.roleId}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE tbl_user_role_relation SET
+        id = #{id},
+        user_id = #{userId},
+        role_id = #{roleId}
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+        DELETE FROM tbl_user_role_relation
+        WHERE id = #{id}
+    </update>
+
+</mapper>

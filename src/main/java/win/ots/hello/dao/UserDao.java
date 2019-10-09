@@ -1,17 +1,20 @@
-package win.ots.hello.service;
+package win.ots.hello.dao;
 
 import win.ots.hello.entity.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Author: sy.wang
  * Date: 20191009
  */
-public interface UserService {
+@Repository
+public interface UserDao {
 
     User get(int id);
+
+    User getByUserName(String userName);
 
     List<User> findList(User user);
 
@@ -25,7 +28,4 @@ public interface UserService {
 
     int delete(User user);
 
-    Set<String> getRolesByUserId(int userId);
-
-    User getByUserName(String userName);
 }
