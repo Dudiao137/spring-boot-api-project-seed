@@ -1,14 +1,16 @@
-package win.ots.hello.service;
+package win.ots.hello.dao;
 
 import win.ots.hello.entity.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * Author: sy.wang
- * Date: 20191009
+ * Author sy.wang
+ * Date  20191009
  */
-public interface UserService {
+@Repository
+public interface UserDao {
 
     User get(String id);
 

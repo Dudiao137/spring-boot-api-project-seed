@@ -13,8 +13,6 @@ public class Generator {
 
     public static void main(String[] args) {
         Invoker invoker = new SingleInvoker.Builder()
-//                .setDatabase("generator-demo")
-//                .setUsername("root")
                 .setTableName("tbl_user")
                 .setClassName("User")
                 .build();

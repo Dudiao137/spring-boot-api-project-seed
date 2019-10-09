@@ -2,34 +2,45 @@ package win.ots.hello.entity;
 
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Date;
+import java.math.BigDecimal;
 
+/**
+ * Author sy.wang
+ * Date  20191009
+ */
 @Data
-@Entity
-@Table(name = "tbl_user")
 public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+    /* column = id */
+    private int id;
 
-	private String username;
+    /* column = user_name */
+    private String userName;
 
-	private String password;
+    /* column = password */
+    private String password;
 
-	@Column(name = "nick_name")
-	private String nickName;
+    /* column = nick_name */
+    private String nickName;
 
-	private String phone;
+    /* column = phone */
+    private String phone;
 
-	private String email;
+    /* column = email */
+    private String email;
 
-	private String avatar;
+    /* column = avatar */
+    private String avatar;
 
-	private Long sex;
+    /* column = sex */
+    private int sex;
 
-	@Column(name = "register_date")
-	private java.util.Date registerDate;
+    /* column = register_date */
+    private Date registerDate;
+
 
 }

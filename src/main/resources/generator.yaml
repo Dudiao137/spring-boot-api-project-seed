@@ -3,7 +3,7 @@ db: # v1.1.0 新增
   username: test
   password: test123456
 author: sy.wang
-packageName: win.ots.hello.v1
+packageName: win.ots.hello
 path:
   controller: web.controller
   service: service.impl
