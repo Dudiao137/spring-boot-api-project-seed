@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -26,7 +28,9 @@ import java.util.List;
  * Spring MVC 配置
  */
 @Slf4j
+@EnableAsync
 @Configuration
+@EnableScheduling
 public class WebMvcConfig implements WebMvcConfigurer {
 
     /* 配置过滤器 */
