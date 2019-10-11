@@ -7,6 +7,15 @@ spring:
   resources:
     add-mappings: false
 
+  datasource:
+    url: @datasource.url@
+    username: @datasource.username@
+    password: @datasource.password@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    win.ots.hello.dao : debug
 
 # mybatis
 mybatis:

@@ -1,7 +1,7 @@
 db: # v1.1.0 新增
-  url: jdbc:mysql://manjaro:3306/test
-  username: test
-  password: test123456
+  url: @datasource.url@
+  username: @datasource.username@
+  password: @datasource.password@
 author: sy.wang
 packageName: win.ots.hello
 path:

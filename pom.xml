@@ -115,6 +115,17 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <filters>
+            <filter>src/main/filters/filter-${env}.properties</filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
     </build>
 
     <repositories>
@@ -136,5 +147,29 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+            <properties>
+                <env>development</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <env>product</env>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
