@@ -1,15 +1,15 @@
 package win.ots.hello.configurer;
 
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -20,8 +20,6 @@ import win.ots.hello.core.exception.ExceptionResolver;
 import win.ots.hello.core.filter.LogCostFilter;
 import win.ots.hello.core.interceptor.TokenInterceptor;
 
-import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,21 +42,24 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return registration;
     }
 
-    //使用阿里 FastJson 作为JSON MessageConverter
+    @Bean
+    public Gson gson() {
+        return new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .setDateFormat("yyyy-MM-dd hh:mm:ss")
+                .create();
+    }
+
+    //使用 gson 作为JSON MessageConverter
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
-        FastJsonConfig config = new FastJsonConfig();
-        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue);//保留空的字段
-        //SerializerFeature.WriteNullStringAsEmpty,//String null -> ""
-        //SerializerFeature.WriteNullNumberAsZero//Number null -> 0
-        // 按需配置，更多参考FastJson文档哈
-
-        converter.setFastJsonConfig(config);
-        converter.setDefaultCharset(Charset.forName("UTF-8"));
-        converter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON_UTF8));
+        GsonHttpMessageConverter converter = new GsonHttpMessageConverter();
+        converter.setGson(gson());
+        converters.clear();
         converters.add(converter);
     }
+
+
 
     /* 统一异常处理 */
     @Autowired

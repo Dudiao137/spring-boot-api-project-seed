@@ -1,6 +1,7 @@
 package win.ots.hello.configurer;
 
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -30,6 +31,15 @@ public class ShiroConfig {
     }
 
     @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        //散列的次数
+        hashedCredentialsMatcher.setHashIterations(2);
+        return hashedCredentialsMatcher;
+    }
+
+    @Bean
     ShiroFilterFactoryBean shiroFilterFactoryBean() {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager());
@@ -39,7 +49,7 @@ public class ShiroConfig {
 
         Map<String, String> map = new LinkedHashMap<>();
         map.put("/login", "anon");
-        map.put("/register", "anon");
+        map.put("/users/register", "anon");
         map.put("/**", "authc");
         bean.setFilterChainDefinitionMap(map);
 

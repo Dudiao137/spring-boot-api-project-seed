@@ -20,9 +20,6 @@ import win.ots.hello.web.vo.UserInfoVo;
 @RestController
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result doLogin(@RequestParam(value = "user_name") String userName,
                           @RequestParam(value = "password") String password) {
@@ -37,20 +34,6 @@ public class LoginController {
         subject.logout();
         return ResultGenerator.genSuccessResult();
     }
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public Result<UserInfoVo> doRegister(@RequestBody UserCreateVo createVo) {
-        User user = new User();
-        BeanUtils.copyProperties(createVo, user);
-
-        userService.insert(user);
-
-        UserInfoVo userInfoVo = new UserInfoVo();
-        BeanUtils.copyProperties(user, userInfoVo);
-
-        return ResultGenerator.genSuccessResult(userInfoVo);
-    }
-
 
     @RequestMapping(value = "/login_page", method = RequestMethod.GET)
     public String login() {

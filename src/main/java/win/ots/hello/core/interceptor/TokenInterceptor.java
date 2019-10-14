@@ -1,9 +1,10 @@
 package win.ots.hello.core.interceptor;
 
-import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -31,6 +32,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 
     private final String DEV = "dev";
 
+    @Autowired
+    private Gson gson;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -45,7 +49,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             return true;
         } else {
             log.warn("签名认证失败，请求接口：{}，请求IP：{}，请求参数：{}",
-                    request.getRequestURI(), getIpAddress(request), JSON.toJSONString(request.getParameterMap()));
+                    request.getRequestURI(), getIpAddress(request), gson.toJson(request.getParameterMap()));
 
             Result result = new Result();
             result.setCode(ResultCode.UNAUTHORIZED).setMessage("签名认证失败");

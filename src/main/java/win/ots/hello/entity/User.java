@@ -40,7 +40,7 @@ public class User implements Serializable {
     private String avatar;
 
     /* column = sex */
-    private int sex;
+    private Integer sex;
 
     /* column = register_date */
     private Date registerDate;
