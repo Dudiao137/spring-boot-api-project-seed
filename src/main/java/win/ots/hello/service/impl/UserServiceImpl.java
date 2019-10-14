@@ -1,10 +1,11 @@
 package win.ots.hello.service.impl;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import sun.security.provider.MD5;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import win.ots.hello.constant.ShiroConstant;
 import win.ots.hello.dao.RoleDao;
 import win.ots.hello.dao.UserDao;
 import win.ots.hello.dao.UserRoleRelationDao;
@@ -12,8 +13,6 @@ import win.ots.hello.entity.Role;
 import win.ots.hello.entity.User;
 import win.ots.hello.entity.UserRoleRelation;
 import win.ots.hello.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -52,8 +51,7 @@ public class UserServiceImpl implements UserService {
         assert user != null;
         String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
         String password = user.getPassword();
-//        password = new Md5Hash(password, salt, 2).toString();
-        password = DigestUtils.md5Hex(password);
+        password = new Md5Hash(password, salt, ShiroConstant.HASH_ITERATIONS).toString();
         user.setPassword(password);
         user.setSalt(salt);
         user.setRegisterDate(new Date());

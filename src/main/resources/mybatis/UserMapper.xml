@@ -4,15 +4,15 @@
 
     <resultMap id="userResultMap" type="win.ots.hello.entity.User">
         <id column="id" property="id"/> 
-        <result column="userName" property="userName"/> 
+        <result column="userName" property="userName"/>
         <result column="password" property="password"/> 
         <result column="salt" property="salt"/> 
-        <result column="nickName" property="nickName"/> 
+        <result column="nickName" property="nickName"/>
         <result column="phone" property="phone"/> 
         <result column="email" property="email"/> 
         <result column="avatar" property="avatar"/> 
         <result column="sex" property="sex"/> 
-        <result column="registerDate" property="registerDate"/> 
+        <result column="registerDate" property="registerDate"/>
 
         
         

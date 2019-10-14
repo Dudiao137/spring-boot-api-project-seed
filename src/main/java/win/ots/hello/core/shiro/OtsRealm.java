@@ -1,6 +1,5 @@
 package win.ots.hello.core.shiro;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -8,7 +7,6 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -50,22 +48,19 @@ public class OtsRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
         String userName = (String) authenticationToken.getPrincipal();
-        String password = (String) authenticationToken.getCredentials();
         User user = userService.getByUserName(userName);
 
         if (user == null) {
             throw new AuthenticationException("no user with userName :" + userName);
         }
 
-//        String password = new Md5Hash(user.getPassword(), user.getSalt()).toString();
-        password = DigestUtils.md5Hex(password);
         ByteSource salt = ByteSource.Util.bytes(user.getSalt());
 
         SimpleAuthenticationInfo authenticationInfo =
                 new SimpleAuthenticationInfo(
                         user.getUserName(),
-                        password,
-//                        salt,
+                        user.getPassword(),
+                        salt,
                         getName());
 
         return authenticationInfo;

@@ -6,7 +6,7 @@ package win.ots.hello.constant;
  */
 public class ShiroConstant {
 
-    public static int HASH_ITERATIONS = 1024;
+    public static int HASH_ITERATIONS = 2;
     public static String HASH_ALGORITHM_NAME = "MD5";
 
 
