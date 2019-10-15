@@ -38,7 +38,7 @@ public class UserController {
     private UserRoleRelationService userRoleRelationService;
 
     @RequestMapping(value = "/{user_id}", method = RequestMethod.GET)
-    public Result<User> get(@PathVariable(value = "user_id") Long userId) {
+    public Result<User> get(@PathVariable(value = "user_id") int userId) {
 
         User user = userService.get(userId);
         return ResultGenerator.genSuccessResult(user);

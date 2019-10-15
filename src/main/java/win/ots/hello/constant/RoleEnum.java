@@ -5,20 +5,20 @@ package win.ots.hello.constant;
  * @date : 20191015
  */
 public enum RoleEnum {
-    root(1L, "超级管理员"),
-    admin(2L, "系统管理员"),
-    user(3L, "一般用户");
+    root(1, "超级管理员"),
+    admin(2, "系统管理员"),
+    user(3, "一般用户");
 
-    private Long id;
+    private Integer id;
 
     private String roleName;
 
-    RoleEnum(Long id, String roleName) {
+    RoleEnum(Integer id, String roleName) {
         this.id = id;
         this.roleName = roleName;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
