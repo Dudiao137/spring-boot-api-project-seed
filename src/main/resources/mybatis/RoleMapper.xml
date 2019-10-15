@@ -5,6 +5,7 @@
     <resultMap id="roleResultMap" type="win.ots.hello.entity.Role">
         <id column="id" property="id"/> 
         <result column="role" property="role"/> 
+        <result column="roleName" property="roleName"/> 
 
         
         
@@ -12,7 +13,8 @@
 
     <sql id="roleColumns">
         tbl_role.id AS "id",
-        tbl_role.role AS "role"
+        tbl_role.role AS "role",
+        tbl_role.role_name AS "roleName"
     </sql>
 
     <sql id="roleJoins">
@@ -46,25 +48,25 @@
 
     <insert id="insert">
         INSERT INTO tbl_role(
-            id,
-            role
+            role,
+            role_name
         )
         VALUES (
-            #{id},
-            #{role}
+            #{role},
+            #{roleName}
         )
     </insert>
 
     <insert id="insertBatch">
         INSERT INTO tbl_role(
-            id,
-            role
+            role,
+            role_name
         )
         VALUES
         <foreach collection ="list" item="role" separator =",">
         (
-            #{role.id},
-            #{role.role}
+            #{role.role},
+            #{role.roleName}
         )
         </foreach>
     </insert>
@@ -72,7 +74,8 @@
     <update id="update">
         UPDATE tbl_role SET
         id = #{id},
-        role = #{role}
+        role = #{role},
+        role_name = #{roleName}
         WHERE id = #{id}
     </update>
 

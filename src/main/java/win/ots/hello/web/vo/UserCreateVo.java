@@ -26,6 +26,6 @@ public class UserCreateVo {
 
 	private String avatar;
 
-	private Integer sex;
+	private Integer sex = 0;
 
 }

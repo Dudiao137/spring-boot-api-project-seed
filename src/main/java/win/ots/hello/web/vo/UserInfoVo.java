@@ -1,9 +1,15 @@
 package win.ots.hello.web.vo;
 
+import lombok.Data;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author: sy.wang
  * @date: 20190929
  */
+@Data
 public class UserInfoVo {
 
     private Long id;
@@ -18,7 +24,10 @@ public class UserInfoVo {
 
 	private String avatar;
 
-	private Integer sex;
+	private String sexName;
 
 	private java.util.Date registerDate;
+
+	private Set<String> roles = new HashSet<>();
+
 }

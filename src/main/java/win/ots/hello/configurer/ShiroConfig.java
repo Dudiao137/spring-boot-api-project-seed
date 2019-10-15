@@ -35,7 +35,6 @@ public class ShiroConfig {
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         hashedCredentialsMatcher.setHashAlgorithmName(ShiroConstant.HASH_ALGORITHM_NAME);
-        //散列的次数
         hashedCredentialsMatcher.setHashIterations(ShiroConstant.HASH_ITERATIONS);
         return hashedCredentialsMatcher;
     }

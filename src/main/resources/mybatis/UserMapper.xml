@@ -71,7 +71,6 @@
 
     <insert id="insert">
         INSERT INTO tbl_user(
-            id,
             user_name,
             password,
             salt,
@@ -83,7 +82,6 @@
             register_date
         )
         VALUES (
-            #{id},
             #{userName},
             #{password},
             #{salt},
@@ -98,7 +96,6 @@
 
     <insert id="insertBatch">
         INSERT INTO tbl_user(
-            id,
             user_name,
             password,
             salt,
@@ -112,7 +109,6 @@
         VALUES
         <foreach collection ="list" item="user" separator =",">
         (
-            #{user.id},
             #{user.userName},
             #{user.password},
             #{user.salt},

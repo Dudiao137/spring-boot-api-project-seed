@@ -48,12 +48,10 @@
 
     <insert id="insert">
         INSERT INTO tbl_user_role_relation(
-            id,
             user_id,
             role_id
         )
         VALUES (
-            #{id},
             #{userId},
             #{roleId}
         )
@@ -61,14 +59,12 @@
 
     <insert id="insertBatch">
         INSERT INTO tbl_user_role_relation(
-            id,
             user_id,
             role_id
         )
         VALUES
         <foreach collection ="list" item="userRoleRelation" separator =",">
         (
-            #{userRoleRelation.id},
             #{userRoleRelation.userId},
             #{userRoleRelation.roleId}
         )

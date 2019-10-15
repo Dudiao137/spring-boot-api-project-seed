@@ -21,5 +21,8 @@ public class Role implements Serializable {
     /* column = role */
     private String role;
 
+    /* column = role_name */
+    private String roleName;
+
 
 }
