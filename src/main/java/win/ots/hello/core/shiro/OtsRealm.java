@@ -12,8 +12,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Component;
-import win.ots.hello.entity.User;
-import win.ots.hello.service.UserService;
+import win.ots.hello.v1.entity.User;
+import win.ots.hello.v1.service.IUserService;
 
 import javax.annotation.Resource;
 import java.util.Set;
@@ -26,7 +26,7 @@ import java.util.Set;
 public class OtsRealm extends AuthorizingRealm {
 
     @Resource
-    private UserService userService;
+    private IUserService userService;
 
 
     @Override

@@ -25,4 +25,13 @@ public enum RoleEnum {
     public String getRoleName() {
         return roleName;
     }
+
+    public static RoleEnum getById(Integer id) {
+        for (RoleEnum roleEnum : RoleEnum.values()) {
+            if (roleEnum.id == id) {
+                return roleEnum;
+            }
+        }
+        return user;
+    }
 }

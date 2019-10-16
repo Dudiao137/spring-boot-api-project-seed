@@ -6,8 +6,13 @@ package win.ots.hello.constant;
  */
 public class ShiroConstant {
 
-    public static int HASH_ITERATIONS = 2;
-    public static String HASH_ALGORITHM_NAME = "MD5";
+    public static final int HASH_ITERATIONS = 2;
+    public static final String HASH_ALGORITHM_NAME = "MD5";
+
+    public static final String ROLE_ROOT = "root";
+    public static final String ROLE_ADMIN = "admin";
+    public static final String ROLE_USER = "user";
+
 
 
 }

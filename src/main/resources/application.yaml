@@ -18,5 +18,5 @@ logging:
     win.ots.hello.dao : debug
 
 # mybatis
-mybatis:
-  mapper-locations: "classpath:mybatis/*Mapper.xml"
+#mybatis:
+#  mapper-locations: "classpath:mapper/*Mapper.xml"

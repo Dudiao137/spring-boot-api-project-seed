@@ -1,4 +1,4 @@
-package com.company.core;
+package win.ots.hello.core.generator;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -26,7 +26,7 @@ public class Generator {
     private static String packageName = "win.ots.hello";
     private static String superEntity = null;
     private static String superController = null;
-    private static String tableNames = "tbl_user";
+    private static String tableNames = "tbl_user_role_relation";
 
     public static void main(String[] args) {
 

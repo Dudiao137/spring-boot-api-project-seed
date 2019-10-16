@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import win.ots.hello.constant.ShiroConstant;
 import win.ots.hello.core.result.Result;
 import win.ots.hello.core.result.ResultGenerator;
-import win.ots.hello.entity.User;
-import win.ots.hello.service.UserService;
+import win.ots.hello.v1.entity.User;
+import win.ots.hello.v1.service.IUserService;
 
 /**
  * @author : sy.wang
@@ -24,7 +24,7 @@ import win.ots.hello.service.UserService;
 public class LoginController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result doLogin(@RequestParam(value = "user_name") String userName,
