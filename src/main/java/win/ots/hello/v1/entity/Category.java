@@ -11,28 +11,34 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 商品类别表
  * </p>
  *
  * @author sy.wang
- * @since 2019-10-16
+ * @since 2019-10-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("tbl_user_role_relation")
-public class UserRoleRelation implements Serializable {
+@TableName("tbl_category")
+public class Category implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @TableField("user_id")
-    private Integer userId;
+    /**
+     * 类别名称
+     */
+    @TableField("category_name")
+    private String categoryName;
 
-    @TableField("role_id")
-    private Integer roleId;
+    /**
+     * 父类别ID
+     */
+    @TableField("parent_id")
+    private Long parentId;
 
 
 }

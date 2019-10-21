@@ -22,7 +22,7 @@ public class UserServiceImplTest extends SimpleTest {
 
     @Test
     public void getRolesByUserId() {
-        Integer userId = 1;
+        Long userId = 1L;
         Set<String> roles = userService.getRolesByUserId(userId);
         log.info("roles: {}", roles);
     }

@@ -11,28 +11,34 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 规格值表
  * </p>
  *
  * @author sy.wang
- * @since 2019-10-16
+ * @since 2019-10-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("tbl_user_role_relation")
-public class UserRoleRelation implements Serializable {
+@TableName("tbl_spec_value")
+public class SpecValue implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @TableField("user_id")
-    private Integer userId;
+    /**
+     * 规格ID
+     */
+    @TableField("spec_id")
+    private Long specId;
 
-    @TableField("role_id")
-    private Integer roleId;
+    /**
+     * 规格值
+     */
+    @TableField("spec_value")
+    private String specValue;
 
 
 }

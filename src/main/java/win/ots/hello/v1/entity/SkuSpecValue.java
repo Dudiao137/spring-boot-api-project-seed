@@ -11,28 +11,31 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * sku 与 规格值 的关联表
  * </p>
  *
  * @author sy.wang
- * @since 2019-10-16
+ * @since 2019-10-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("tbl_user_role_relation")
-public class UserRoleRelation implements Serializable {
+@TableName("tbl_sku_spec_value")
+public class SkuSpecValue implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @TableField("user_id")
-    private Integer userId;
+    @TableField("sku_id")
+    private Long skuId;
 
-    @TableField("role_id")
-    private Integer roleId;
+    /**
+     * 对应的规格值
+     */
+    @TableField("spec_value_id")
+    private Long specValueId;
 
 
 }

@@ -11,28 +11,34 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * spu与规格关联表
  * </p>
  *
  * @author sy.wang
- * @since 2019-10-16
+ * @since 2019-10-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("tbl_user_role_relation")
-public class UserRoleRelation implements Serializable {
+@TableName("tbl_spu_spec")
+public class SpuSpec implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @TableField("user_id")
-    private Integer userId;
+    /**
+     * spu ID
+     */
+    @TableField("spu_id")
+    private Long spuId;
 
-    @TableField("role_id")
-    private Integer roleId;
+    /**
+     * 规格ID
+     */
+    @TableField("spec_id")
+    private Long specId;
 
 
 }

@@ -58,7 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public Set<String> getRolesByUserId(Integer userId) {
+    public Set<String> getRolesByUserId(Long userId) {
         QueryWrapper<UserRoleRelation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id", userId);
         List<UserRoleRelation> roleRelations = userRoleRelationMapper.selectList(queryWrapper);
@@ -99,7 +99,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public UserInfoVo getUserInfo(Integer userId) {
+    public UserInfoVo getUserInfo(Long userId) {
 
         User user = userMapper.selectById(userId);
         return this.getUserInfo(user);

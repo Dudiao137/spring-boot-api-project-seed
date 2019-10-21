@@ -13,6 +13,11 @@ spring:
     password: @datasource.password@
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
 logging:
   level:
     win.ots.hello.dao : debug
@@ -20,3 +25,6 @@ logging:
 # mybatis
 #mybatis:
 #  mapper-locations: "classpath:mapper/*Mapper.xml"
+
+common:
+  base-upload-file: /home/otswang/workplace/upload/

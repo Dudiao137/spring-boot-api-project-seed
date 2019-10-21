@@ -26,7 +26,7 @@ public class Generator {
     private static String packageName = "win.ots.hello";
     private static String superEntity = null;
     private static String superController = null;
-    private static String tableNames = "tbl_user_role_relation";
+    private static String tableNames = "tbl_brand,tbl_category,tbl_image,tbl_shop,tbl_sku,tbl_sku_spec_value,tbl_spec_value,tbl_specification,tbl_spu,tbl_spu_spec";
 
     public static void main(String[] args) {
 
@@ -41,7 +41,8 @@ public class Generator {
         gc.setAuthor(author);
         gc.setOpen(false);
         gc.setDateType(DateType.ONLY_DATE);
-        // gc.setSwagger2(true); 实体属性 Swagger2 注解
+        // gc.setSwagger2(true);
+        // gc.setFileOverride(true);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置

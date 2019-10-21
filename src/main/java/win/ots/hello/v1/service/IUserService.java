@@ -20,11 +20,11 @@ public interface IUserService extends IService<User> {
 
     User getByUserName(String userName);
 
-    Set<String> getRolesByUserId(Integer id);
+    Set<String> getRolesByUserId(Long id);
 
     List<User> getPageByQuery();
 
     UserInfoVo register(UserCreateVo createVo);
 
-    UserInfoVo getUserInfo(Integer userId);
+    UserInfoVo getUserInfo(Long userId);
 }
