@@ -3,22 +3,17 @@ package win.ots.hello.web.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import win.ots.hello.constant.ErrorMessage;
-import win.ots.hello.core.exception.ServiceException;
 import win.ots.hello.core.result.Result;
 import win.ots.hello.core.result.ResultGenerator;
 import win.ots.hello.v1.service.IFileUploadService;
 import win.ots.hello.web.vo.UploadResultVo;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 

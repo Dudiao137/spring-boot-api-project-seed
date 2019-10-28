@@ -3,6 +3,7 @@ package win.ots.hello.core.exception;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -39,6 +40,8 @@ public class ExceptionResolver implements HandlerExceptionResolver {
             result.setCode(ResultCode.FAIL).setMessage(ex.getMessage());
         } else if (ex instanceof MaxUploadSizeExceededException) {
             result.setCode(ResultCode.FAIL).setMessage(ex.getMessage());
+        } else if (ex instanceof MethodArgumentNotValidException) {
+            result.setCode(ResultCode.INVALID_INPUT).setMessage(ex.getMessage());
         } else {
             result.setCode(ResultCode.INTERNAL_SERVER_ERROR).setMessage("接口 [" + request.getRequestURI() + "] 内部错误，请联系管理员");
             String message;
