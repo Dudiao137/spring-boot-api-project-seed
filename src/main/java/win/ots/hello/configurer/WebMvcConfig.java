@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import win.ots.hello.core.exception.ExceptionResolver;
 import win.ots.hello.core.filter.LogCostFilter;
@@ -51,13 +52,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     //使用 gson 作为JSON MessageConverter
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        GsonHttpMessageConverter converter = new GsonHttpMessageConverter();
-        converter.setGson(gson());
-        converters.clear();
-        converters.add(converter);
-    }
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        GsonHttpMessageConverter converter = new GsonHttpMessageConverter();
+//        converter.setGson(gson());
+//        converters.clear();
+//        converters.add(converter);
+//    }
 
 
 
@@ -84,6 +85,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(tokenInterceptor);
     }
 
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
 
 
 }
