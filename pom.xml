@@ -104,7 +104,18 @@
             <version>1.4.0</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-core</artifactId>
+            <scope>compile</scope>
+            <version>1.5.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <build>
@@ -120,6 +131,47 @@
                     <target>${java.version}</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <apiSources>
+                      <apiSource>
+                            <springmvc>true</springmvc>
+                            <locations>win.ots.hello</locations>
+<!--                            <schemes>http,https</schemes>-->
+                            <host>localhost:8090</host>
+                            <basePath>/api</basePath>
+                            <info>
+                                <title>spring boot api project feed </title>
+                                <version>v1</version>
+                                <description>This is a sample for spring boot api project feed</description>
+                                <contact>
+                                    <email>otswang@cqu.edu.cn</email>
+                                    <name>Ots Wang</name>
+                                    <url>http://www.otswang.win</url>
+                                </contact>
+                                <license>
+                                    <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+                                    <name>Apache 2.0</name>
+                                </license>
+                            </info>
+                            <templatePath>${basedir}/templates/strapdown.html.hbs</templatePath>
+                            <outputPath>${basedir}/generated/document.html</outputPath>
+                            <swaggerDirectory>generated/swagger-ui</swaggerDirectory>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 

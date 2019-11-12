@@ -1,5 +1,7 @@
 package win.ots.hello.web.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import java.util.List;
  * @author : sy.wang
  * @date : 2019-10-17
  */
+@Api("上传管理")
 @Slf4j
 @RestController
 @RequestMapping("/upload")
@@ -29,6 +32,7 @@ public class UploadController {
     @Autowired
     private IFileUploadService fileUploadService;
 
+    @ApiOperation("单文件上传")
     @RequestMapping(value = "/simple", method = RequestMethod.POST)
     public Result<UploadResultVo> simpleUpload(@RequestParam("file") MultipartFile multipartFile){
 
@@ -37,6 +41,7 @@ public class UploadController {
         return ResultGenerator.genSuccessResult(resultVo);
     }
 
+    @ApiOperation("多文件上传")
     @RequestMapping(value = "/multi", method = RequestMethod.POST)
     public Result<List<UploadResultVo>> multiUpload(@RequestParam("files") List<MultipartFile> multipartFiles){
         if (CollectionUtils.isEmpty(multipartFiles)) {

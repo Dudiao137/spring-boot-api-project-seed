@@ -1,5 +1,7 @@
 package win.ots.hello.web.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,7 @@ import java.util.List;
  * @author : sy.wang
  * @date : 20191016
  */
+@Api("角色管理")
 @RestController
 @RequestMapping(value = "/roles")
 public class RoleController {
@@ -31,6 +34,7 @@ public class RoleController {
     @Autowired
     private IUserRoleRelationService userRoleRelationService;
 
+    @ApiOperation("新增角色")
     @RequiresRoles({ShiroConstant.ROLE_ROOT})
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Result<RoleVo> addRoleRelation(@RequestBody @Valid RoleVo inputVo) {
@@ -38,6 +42,7 @@ public class RoleController {
         return ResultGenerator.genSuccessResult(roleVo);
     }
 
+    @ApiOperation("用户注册角色")
     @RequiresRoles({ShiroConstant.ROLE_ROOT})
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result<List<RoleUserVo>> addRoleRelation(@RequestBody @Valid List<UserRoleRelationInputVo> inputVos) {

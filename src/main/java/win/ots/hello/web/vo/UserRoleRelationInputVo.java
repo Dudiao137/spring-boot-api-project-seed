@@ -1,5 +1,6 @@
 package win.ots.hello.web.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -11,9 +12,11 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserRoleRelationInputVo {
 
+    @ApiModelProperty("用户id")
     @NotNull
     private Integer userId;
 
+    @ApiModelProperty("角色id")
     @NotNull
     private Integer roleId;
 

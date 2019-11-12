@@ -1,5 +1,6 @@
 package win.ots.hello.web.controller;
 
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
  * @author : sy.wang
  * @date : 2019-10-28
  */
+@Api("测试")
 @Slf4j
 @RestController
 @RequestMapping("/test")
